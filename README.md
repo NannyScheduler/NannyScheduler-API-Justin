@@ -11,9 +11,13 @@ The `Parents` endpoint holds data for parents, and front-end engineers can build
 
 The `Nannies` endpoint holds data for nannies, and front-end engineers can build a form to collect data supported by `POST` and `PUT` endpoints. `GET` and `DELETE` also supported:
 
-a. Register a nanny: [Send `POST' request here](https://nanny-scheduler-api.herokuapp.com/api/nannies/register)
-b. Update a nanny: [Send `PUT' request here](https://nanny-scheduler-api.herokuapp.com/api/nannies/:id)
-c. Delete Nanny by ID: [Send `Delete` Request here](https://nanny-scheduler-api.herokuapp.com/nannies/:id)
+1. Register a nanny: [Send `POST` request here](https://nanny-scheduler-api.herokuapp.com/api/nannies/register)
+
+
+2. Update a nanny: [Send `PUT` request here](https://nanny-scheduler-api.herokuapp.com/api/nannies/:id)
+
+3. Delete Nanny by ID: [Send `DELETE` Request here](https://nanny-scheduler-api.herokuapp.com/nannies/:id)
+
 
 ## Database Schema 
 
