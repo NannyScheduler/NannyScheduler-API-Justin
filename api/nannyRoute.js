@@ -16,6 +16,16 @@ router.get('/', (req, res) => {
   })
 })
 
+router.get('/:id', (req, res) => {
+    const id = req.params.id;
+    Nanny.findNannyById(id)
+    .then(nanny => {
+        res.status(200).json(nanny)
+    })
+    .catch(err => {
+        res.status(501).json({message: `Couldn't get your nanny, and here's why: ${err.message}`})
+    })
+})
 
 
 
