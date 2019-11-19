@@ -4,7 +4,7 @@ const express = require('express');
 const server = express();
 const helper = require('./api/nanny-models');
 
-const port = 9000;
+const port = process.env.PORT || 9000
 
 server.get('/', (req, res) => {
     res.status(201).send('<img src="https://media.giphy.com/media/UqUJhrD0om73q/giphy.gif"/>')
