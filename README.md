@@ -41,3 +41,5 @@ The `Nannies` endpoint holds data for nannies, and front-end engineers can build
 3. todos CRUD
 4. Cookie Authentication
 5. Location tracking
+6. Chat between Parents and Nannies
+7. Image upload
