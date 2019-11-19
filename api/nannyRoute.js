@@ -61,8 +61,14 @@ router.put('/:id', (req, res) => {
 //Delete nanny
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
-    constant nannyToDelete = req.body;
-    
+    Nanny.deleteNanny(id) 
+    .then(() => {
+        res.status(201).json({message: `Nanny number ${id} successfully deleted!`})
+    })
+    .catch(err => {
+        res.status(500).json({message: `That deletion did not quite work out. Hm. ${err.message}`})
+    })
+
 })
 
 

@@ -43,6 +43,6 @@ function updateNanny(id, nanny) {
 }
 
 //Delete Nanny
-function deleteNanny(id, nanny) {
-    return db('nannies').delete(nanny).where({id: id})
+function deleteNanny(id) {
+    return db('nannies').where({id: id}).del()
 }
