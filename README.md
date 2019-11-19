@@ -1,7 +1,7 @@
 # NannyScheduler-Backend-API
 
 ## Introduction
-The Nanny Scheduler API, designed by Justin Irabor (mogwai), can be found [here:] (https://nanny-scheduler-api.herokuapp.com/) (bare linkin' here: https://nanny-scheduler-api.herokuapp.com/)
+The Nanny Scheduler API, designed by Justin Irabor (mogwai), can be found [here.](https://nanny-scheduler-api.herokuapp.com/)
 
 It handles four different databases with their distinct endpoints. 
 
@@ -21,7 +21,7 @@ c. Delete Nanny by ID: [Send `Delete` Request here](https://nanny-scheduler-api.
 ![Nanny schema](https://res.cloudinary.com/studio-mogwai/image/upload/v1574167104/Screenshot_2019-11-19_at_13.34.37.png)
 
 ### Parents 
-![Parents schema] (https://res.cloudinary.com/studio-mogwai/image/upload/v1574167100/Screenshot_2019-11-19_at_13.34.46.png)
+![Parents schema](https://res.cloudinary.com/studio-mogwai/image/upload/v1574167100/Screenshot_2019-11-19_at_13.34.46.png)
 
 ### Users
 ![Users schema](https://res.cloudinary.com/studio-mogwai/image/upload/v1574167100/Screenshot_2019-11-19_at_13.34.56.png)
