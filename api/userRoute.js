@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Nanny = require('./nanny-models');
+const User = require('./nanny-models');
 
 
 // const bcrypt = require('bcryptjs');
@@ -9,8 +9,9 @@ const Nanny = require('./nanny-models');
 // const cookielock = require('./authenticate-middleware');
 
 
-router.get('/', (req, res) => {
-  Nanny.findAllNannies()
+router.post('/register', (req, res) => {
+    const user = req.body;
+  User.createUser(user)
   .then(data => {
     res.status(200).json(data);
   })
