@@ -27,7 +27,7 @@ exports.up = function(knex) {
         tbl.string('skill2', 128);
         tbl.string('skill3', 128);
         tbl.boolean('can_drive').notNullable();
-        tbl.boolean('first_aid', 128).notNullable();
+        tbl.boolean('first_aid').notNullable();
         tbl.string('address', 128).notNullable();
         tbl.string('phone', 128).notNullable();
         tbl.string('img', 128);
