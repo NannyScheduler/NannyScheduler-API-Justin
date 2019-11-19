@@ -7,7 +7,7 @@ const server = express();
 
 //Defining Routes
 server.use('/api/nannies', nannyRouter);
-server.use('/api', userRouter);
+server.use('/api/users', userRouter);
 
 
 

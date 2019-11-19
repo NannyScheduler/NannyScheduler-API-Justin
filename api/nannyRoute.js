@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Nanny = require('./nanny-models');
+const bodyParser    = require('body-parser')
+
+router.use(bodyParser.json())
+router.use(bodyParser.urlencoded({ extended: false }))
 
 
 // const bcrypt = require('bcryptjs');
@@ -8,7 +12,7 @@ const Nanny = require('./nanny-models');
 
 // const cookielock = require('./authenticate-middleware');
 
-
+//Get all nannies
 router.get('/', (req, res) => {
   Nanny.findAllNannies()
   .then(data => {
@@ -16,6 +20,7 @@ router.get('/', (req, res) => {
   })
 })
 
+//Get nanny by id
 router.get('/:id', (req, res) => {
     const id = req.params.id;
     Nanny.findNannyById(id)
@@ -27,6 +32,38 @@ router.get('/:id', (req, res) => {
     })
 })
 
+//Create new nanny
+router.post('/register', (req, res) => {
+    // const nanny = {lname: "Justin", fname: "Paradise", skill1: "Fishing", can_drive: true, first_aid: true, address: "That Place", phone: "109090", nanny_id: 1, };
+    const nanny = req.body;
+    Nanny.createNanny(nanny)
+    .then(() => {
+        res.status(201).json({message: `New nanny named ${nanny.fname} created!`})
+    })
+    .catch(err => {
+        res.status(501).json({message: `Something went wrong. The error is: ${err.message}`})
+    })
+})
+
+//Edit/Update Nanny
+router.put('/:id', (req, res) => {
+    const id = req.params.id;
+    const updatedNanny = req.body;
+    Nanny.updateNanny(id, updatedNanny)
+    .then(() => {
+        res.status(201).json({message: `Excellent! Nanny ${updatedNanny.fname} has been updated!`});
+    })
+    .catch(err => {
+        res.status(500).json({message: `Something went seriously tits up: ${err.message}`})
+    })
+})
+
+//Delete nanny
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    constant nannyToDelete = req.body;
+    
+})
 
 
 
