@@ -25,7 +25,7 @@ router.post('/register', (req, res) => {
 })
 
 //Handle PUT requests that lead to profile updating 
-router.post('/update/:id', (req, res) => {
+router.put('/update/:id', (req, res) => {
     const id = req.params.id;
     const updatedUser = req.body;
     User.updateUser(id, updatedUser)
