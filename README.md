@@ -1,19 +1,39 @@
 # NannyScheduler-Backend-API
 
-API lovingly designed by mogwai. 
+## Introduction
+The Nanny Scheduler API, designed by Justin Irabor (mogwai), can be found [here:] (https://nanny-scheduler-api.herokuapp.com/) (bare linkin' here: https://nanny-scheduler-api.herokuapp.com/)
+
+It handles four different databases with their distinct endpoints. 
+
+The `Users` database is used to handle login and logout functionality and define who (parent, nannies, admins) has access to what. 
+
+The `Parents` endpoint holds data for parents, and front-end engineers can build a form to collect data that is supported by `POST` and `PUT` endpoints. 
+
+The `Nannies` endpoint holds data for nannies, and front-end engineers can build a form to collect data supported by `POST` and `PUT` endpoints. `GET` and `DELETE` also supported:
+
+a. Register a nanny: [Send `POST' request here](https://nanny-scheduler-api.herokuapp.com/api/nannies/register)
+b. Update a nanny: [Send `PUT' request here](https://nanny-scheduler-api.herokuapp.com/api/nannies/:id)
+c. Delete Nanny by ID: [Send `Delete` Request here](https://nanny-scheduler-api.herokuapp.com/nannies/:id)
+
+## Database Schema 
+
+### Nannies
+![Nanny schema](https://res.cloudinary.com/studio-mogwai/image/upload/v1574167104/Screenshot_2019-11-19_at_13.34.37.png)
+
+### Parents 
+![Parents schema] (https://res.cloudinary.com/studio-mogwai/image/upload/v1574167100/Screenshot_2019-11-19_at_13.34.46.png)
+
+### Users
+![Users schema](https://res.cloudinary.com/studio-mogwai/image/upload/v1574167100/Screenshot_2019-11-19_at_13.34.56.png)
+
+### Todos
+![Todos schema](https://res.cloudinary.com/studio-mogwai/image/upload/v1574167103/Screenshot_2019-11-19_at_13.35.03.png)
 
 
-What's done so far: 
-1. Can fetch list of nannies using /api/nannies
-2. Can make POST request to register users on /api/register
-3. Can make PUT request to update available users on /api/update/:id
 
-
-What's next:
-1. Bcrypt Encryptiomn
-2. Endpoint creation
-3. Routes
-4. Authentication
-5. Some middleware cleanup. 
-6. More endpoints 
-7. Location tracking
+### What's next:
+1. bcrypt middleware
+2. parents CRUD
+3. todos CRUD
+4. Cookie Authentication
+5. Location tracking
