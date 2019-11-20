@@ -7,10 +7,11 @@ router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: false }))
 
 
-// const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 
-// const cookielock = require('./authenticate-middleware');
+//Middleware
+const Middleware = require('../api/middleware');
 
 //Get all nannies
 router.get('/', (req, res) => {
@@ -34,8 +35,9 @@ router.get('/:id', (req, res) => {
 
 //Create new nanny
 router.post('/register', (req, res) => {
-    // const nanny = {lname: "Justin", fname: "Paradise", skill1: "Fishing", can_drive: true, first_aid: true, address: "That Place", phone: "109090", nanny_id: 1, };
     const nanny = req.body;
+    const hash = bcrypt.hashSync(nanny.password, 14);
+    nanny.password = hash;
     Nanny.createNanny(nanny)
     .then(() => {
         res.status(201).json({message: `New nanny named ${nanny.fname} created!`})

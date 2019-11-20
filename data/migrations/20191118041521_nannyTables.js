@@ -23,9 +23,6 @@ exports.up = function(knex) {
         tbl.increments();
         tbl.string('fname', 128).notNullable();
         tbl.string('lname', 128).notNullable();
-        tbl.string('skill1', 128).notNullable();
-        tbl.string('skill2', 128);
-        tbl.string('skill3', 128);
         tbl.boolean('can_drive').notNullable();
         tbl.boolean('first_aid').notNullable();
         tbl.string('address', 128).notNullable();

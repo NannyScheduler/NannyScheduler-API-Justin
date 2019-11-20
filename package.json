@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "jest": {
+    "testEnvirnoment": "node"
+  },
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
@@ -30,7 +33,8 @@
     "helmet": "^3.21.2",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.20.2",
-    "sqlite3": "^4.1.0"
+    "sqlite3": "^4.1.0",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
     "eslint": "^6.6.0",
