@@ -37,6 +37,27 @@ router.put('/update/:id', (req, res) => {
     })
 })
 
+router.get('/', (req, res) => {
+    User.findAllUsers()
+    .then(users => {
+        res.status(201).json(users)
+    })
+    .catch(err => {
+        res.status(500).json({message: err.message})
+    })
+});
+
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    User.deleteUser(id)
+    .then(() => {
+        res.status(201).json({message: `User deleted!`})
+    })
+    .catch(err => {
+        res.status(501).json(err.message);
+    })
+})
+
 
 
 

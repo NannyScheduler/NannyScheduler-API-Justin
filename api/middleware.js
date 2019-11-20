@@ -2,6 +2,7 @@ const helper = require('./nanny-models');
 const bcrypt = require('bcryptjs');
 module.exports = {
     bcryptEncoding,
+    CookieAuth
 }
 
 
@@ -23,5 +24,13 @@ function bcryptEncoding(req, res, next) {
     } else {
       res.status(400).json({ message: 'No credentials provided' });
     }
+  }
+
+  function CookieAuth(req, res, next) {
+    if (req.session && req.session.userID) {
+        next();
+      } else {
+        res.status(401).json({ message: 'you shall not pass!!' });
+      }
   }
 
