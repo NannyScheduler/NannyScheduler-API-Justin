@@ -3,46 +3,97 @@ const db = require('../data/dbConfig');
 module.exports = {
     findAllNannies,
     createUser,
+    findUserById,
     updateUser,
+    deleteUser,
+    findAllUsers,
     findNannyById,
     createNanny,
     updateNanny,
     deleteNanny,
+    findAllParents,
+    findParentsById,
+    createParent,
+    updateParent,
+    deleteParent,
+
+
 }
 
 // 1. Create Users
-function createUser(user){
+function createUser(user) {
     return db('users').insert(user)
 }
 
 //2. Update users
 function updateUser(id, user) {
-    return db('users').where({id: id}).update(user);
+    return db('users').where({ id: id }).update(user);
 }
 
+//3. Delete Users 
+function deleteUser(id) {
+    return db('users').where({ id: id }).del()
+}
+
+//4. Get list of users
+function findAllUsers() {
+    return db('users');
+}
+
+//5. Get user by id
+function findUserById(id) {
+    return db('users').where({ id: id });
+}
 
 // ------------------- THIS IS NANNY STUFF  ---------------------------
-//3. Find All Nannies
-function findAllNannies(){
+//1. Find All Nannies
+function findAllNannies() {
     return db('nannies');
 }
 
-//4. Find Nanny by id
+//2. Find Nanny by id
 function findNannyById(id) {
-    return db('nannies').where({id: id});
+    return db('nannies').where({ id: id });
 }
 
-// Create new nanny
-function createNanny(nanny){
+// 3. Create new nanny
+function createNanny(nanny) {
     return db('nannies').insert(nanny)
 }
 
-//Update nanny
+//4. Update nanny
 function updateNanny(id, nanny) {
-    return db('nannies').where({id: id}).update(nanny);
+    return db('nannies').where({ id: id }).update(nanny);
 }
 
-//Delete Nanny
+//5. Delete Nanny
 function deleteNanny(id) {
-    return db('nannies').where({id: id}).del()
+    return db('nannies').where({ id: id }).del()
 }
+
+//---------------- END OF NANNY STUFF, START OF PARENTS STUFF --------------------------
+//1. Find All Parents
+function findAllParents() {
+    return db('parents');
+}
+
+//2. Find Parent by id
+function findParentsById(id) {
+    return db('parents').where({ id: id });
+}
+
+// 3. Create new Parent
+function createParent(nanny) {
+    return db('parents').insert(nanny)
+}
+
+//4. Update Parent
+function updateParent(id, nanny) {
+    return db('parents').where({ id: id }).update(nanny);
+}
+
+//5. Delete Parent
+function deleteParent(id) {
+    return db('parents').where({ id: id }).del()
+}
+

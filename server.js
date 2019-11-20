@@ -1,6 +1,6 @@
 const express = require('express');
 const nannyRouter = require('./api/nannyRoute');
-// const parentRouter = require('./api/parentRoute');
+const parentRouter = require('./api/parentRoute');
 const userRouter = require('./api/userRoute.js');
 
 const server = express();
@@ -8,6 +8,7 @@ const server = express();
 //Defining Routes
 server.use('/api/nannies', nannyRouter);
 server.use('/api/users', userRouter);
+server.use('/api/parents', parentRouter);
 
 
 
