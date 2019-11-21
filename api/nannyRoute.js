@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Nanny = require('./nanny-models');
-const bodyParser    = require('body-parser')
+const bodyParser    = require('body-parser');
+const moment = require('moment');
 
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: false }))
@@ -38,6 +39,12 @@ router.post('/register', (req, res) => {
     const nanny = req.body;
     const hash = bcrypt.hashSync(nanny.password, 14);
     nanny.password = hash;
+    let fromdate = nanny.fromdate;
+    let todate = nanny.todate;
+    const momentFromDate = moment(fromdate, "HH:mm:ss").format("hh:mm a");
+    const momentToDate = moment(todate, "HH:mm:ss").format("hh:mm a");
+    fromdate = momentFromDate;
+    todate = momentToDate;
     Nanny.createNanny(nanny)
     .then(() => {
         res.status(201).json({message: `New nanny named ${nanny.fname} created!`})

@@ -9,9 +9,11 @@ exports.up = function(knex) {
     .createTable('parents', tbl => {
         tbl.increments();
         tbl.string('fname', 128).notNullable();
-        tbl.string('lname', 128).notNullable();
-        tbl.string('address', 128).notNullable();
-        tbl.string('phone', 128).notNullable();
+        tbl.string('lname', 128);
+        tbl.string('email', 128).notNullable().unique();
+        tbl.string('password', 128).notNullable();
+        tbl.string('city', 128).notNullable();
+        tbl.string('phone', 128);
         tbl.timestamp('created_at').defaultTo(knex.fn.now());
         tbl.integer('parent_id')
         .unsigned()
@@ -21,14 +23,17 @@ exports.up = function(knex) {
     })
     .createTable('nannies', tbl => {
         tbl.increments();
+        tbl.string('email', 128).notNullable().unique();
+        tbl.string('password', 128).notNullable();
         tbl.string('fname', 128).notNullable();
-        tbl.string('lname', 128).notNullable();
+        tbl.string('lname', 128);
         tbl.boolean('can_drive').notNullable();
         tbl.integer('hourly_rates').notNullable();
         tbl.string('city', 128).notNullable();
-        tbl.string('phone', 128).notNullable();
+        tbl.string('phone', 128);
         tbl.string('img', 128);
-        tbl.string('lang', 128);
+        tbl.string('fromdate', 128).notNullable();
+        tbl.string('todate', 128).notNullable();
         tbl.timestamp('created_at').defaultTo(knex.fn.now());
         tbl.integer('nanny_id')
         .unsigned()

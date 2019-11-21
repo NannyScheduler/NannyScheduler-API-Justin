@@ -1,24 +1,30 @@
 const express = require('express');
 const router = express.Router();
 const Parent = require('./nanny-models');
-const bodyParser    = require('body-parser')
+const bodyParser    = require('body-parser');
 
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: false }))
 
 
-// const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 
 // const cookielock = require('./authenticate-middleware');
 
-//Get all Parents
-router.get('/', (req, res) => {
-  Parent.findAllParents()
-  .then(data => {
-    res.status(200).json(data);
-  })
-})
+//Log in Parents
+router.post('/login', (req, res) => {
+    const {password} = req.body;
+    Parent.loginParent(req.body.email)
+    .then(user => {
+    if(!user || !bcrypt.compareSync(password, user.password)) {
+        return res.status(401).json({error: `Incorrect login details!`})
+    } else {
+        // req.session.userID = user;
+        return res.status(200).json({message: `Welcome, ${user.fname}!`})
+    }
+    })
+  });
 
 //Get parent by id
 router.get('/:id', (req, res) => {
@@ -34,8 +40,9 @@ router.get('/:id', (req, res) => {
 
 //Create new parent
 router.post('/register', (req, res) => {
-    // const nanny = {lname: "Justin", fname: "Paradise", skill1: "Fishing", can_drive: true, first_aid: true, address: "That Place", phone: "109090", nanny_id: 1, };
     const parent = req.body;
+    const hash = bcrypt.hashSync(parent.password, 14);
+    parent.password = hash;
     Parent.createParent(parent)
     .then(() => {
         res.status(201).json({message: `New parent named ${parent.fname} created!`})
@@ -58,7 +65,7 @@ router.put('/:id', (req, res) => {
     })
 })
 
-//Delete nanny
+//Delete parent
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
     Parent.deleteParent(id)

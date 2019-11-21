@@ -16,6 +16,7 @@ module.exports = {
     createParent,
     updateParent,
     deleteParent,
+    loginParent,
 
 
 }
@@ -44,6 +45,7 @@ function findAllUsers() {
 function findUserById(id) {
     return db('users').where({ id: id });
 }
+
 
 // ------------------- THIS IS NANNY STUFF  ---------------------------
 //1. Find All Nannies
@@ -97,3 +99,9 @@ function deleteParent(id) {
     return db('parents').where({ id: id }).del()
 }
 
+//6. Login parent
+function loginParent(email){
+    return db('parents')
+    .where({email})
+    .first();
+}
