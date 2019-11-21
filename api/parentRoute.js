@@ -9,6 +9,10 @@ router.use(bodyParser.urlencoded({ extended: false }))
 
 const bcrypt = require('bcryptjs');
 
+router.get('/', (req, res) => {
+    res.status(200).json({message: `this is the parent route`})
+})
+
 //Log in Parents
 router.post('/login', (req, res) => {
     const {password} = req.body;
@@ -23,34 +27,37 @@ router.post('/login', (req, res) => {
     })
   });
 
-//Get Nanny by id
-router.get('/:id', (req, res) => {
-    const id = req.params.id;
-    Parent.findNannyById(id)
-    .then(nanny => {
-        res.status(200).json(nanny)
-    })
-    .catch(err => {
-        res.status(501).json({message: `Couldn't get this parent's info, and here's why: ${err.message}`})
-    })
-})
+// Get Nanny by id
+// router.get('/', (req, res) => {
+//     const id = req.query.id
+//     Parent.findNannyById(id)
+//     .then(nanny => {
+//         res.status(200).json(nanny)
+//     })
+//     .catch(err => {
+//         res.status(501).json({message: `Couldn't get this parent's info, and here's why: ${err.message}`})
+//     })
+// })
 
-//Get Nanny by City
-router.get('/search', (req, res) => {
-    Parent.findNannyByCity(req.query.city)
-    .then(nanny => {
-        res.status(200).json(nanny)
-    })
-    .catch(err => {
-        res.status(501).json({message: `Couldn't get this nanny's info, and here's why: ${err.message}`})
-    })
-})
+// //Get Nanny by City
+// router.get('/:city', (req, res) => {
+//     const city = req.params.city;
+//     city.toString();
+//     Parent.findNannyByCity(city)
+//     .then(nanny => {
+//         res.status(200).json(nanny)
+//     })
+//     .catch(err => {
+//         res.status(501).json({message: `Couldn't get this nanny's info, and here's why: ${err.message}`})
+//     })
+// })
 
 //Create new parent
 router.post('/register', (req, res) => {
     const parent = req.body;
     const hash = bcrypt.hashSync(parent.password, 14);
     parent.password = hash;
+    console.log(hash);
     Parent.createParent(parent)
     .then(() => {
         res.status(201).json({message: `New parent named ${parent.fname} created!`})

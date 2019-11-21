@@ -56,7 +56,7 @@ function findAllNannies() {
 
 //2. Find Nanny by id
 function findNannyById(id) {
-    return db('nannies').where({ id: id });
+    return db('nannies').where({id: id});
 }
 
 // 3. Create new nanny
@@ -75,10 +75,9 @@ function deleteNanny(id) {
 }
 
 //6. Find nanny by city
-//2. Find Nanny by id
-async function findNannyByCity(city) {
-    const nannyByCity = await db('nannies').where({city: city});
-    return nannyByCity;
+function findNannyByCity(city) {
+    return db('nannies').where({city: city});
+
 }
 
 //---------------- END OF NANNY STUFF, START OF PARENTS STUFF --------------------------
