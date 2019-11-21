@@ -11,6 +11,7 @@ module.exports = {
     createNanny,
     updateNanny,
     deleteNanny,
+    findNannyByCity,
     findAllParents,
     findParentsById,
     createParent,
@@ -71,6 +72,12 @@ function updateNanny(id, nanny) {
 //5. Delete Nanny
 function deleteNanny(id) {
     return db('nannies').where({ id: id }).del()
+}
+
+//6. Find nanny by city
+//2. Find Nanny by id
+function findNannyByCity(city) {
+    return db('nannies').where({ city: city });
 }
 
 //---------------- END OF NANNY STUFF, START OF PARENTS STUFF --------------------------

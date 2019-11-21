@@ -10,7 +10,7 @@ router.use(bodyParser.urlencoded({ extended: false }))
 const bcrypt = require('bcryptjs');
 
 
-// const cookielock = require('./authenticate-middleware');
+const Middleware = require('./middleware');
 
 //Log in Parents
 router.post('/login', (req, res) => {
@@ -20,21 +20,33 @@ router.post('/login', (req, res) => {
     if(!user || !bcrypt.compareSync(password, user.password)) {
         return res.status(401).json({error: `Incorrect login details!`})
     } else {
-        // req.session.userID = user;
+        req.session.user = user;
         return res.status(200).json({message: `Welcome, ${user.fname}!`})
     }
     })
   });
 
-//Get parent by id
+//Get Nanny by id
 router.get('/:id', (req, res) => {
     const id = req.params.id;
-    Parent.findParentsById(id)
-    .then(parent => {
-        res.status(200).json(parent)
+    Parent.findNannyById(id)
+    .then(nanny => {
+        res.status(200).json(nanny)
     })
     .catch(err => {
         res.status(501).json({message: `Couldn't get this parent's info, and here's why: ${err.message}`})
+    })
+})
+
+//Get Nanny by City
+router.get('/:city', (req, res) => {
+    const city = req.params.city;
+    Parent.findNannyByCity(city)
+    .then(nanny => {
+        res.status(200).json(nanny)
+    })
+    .catch(err => {
+        res.status(501).json({message: `Couldn't get this nanny's info, and here's why: ${err.message}`})
     })
 })
 

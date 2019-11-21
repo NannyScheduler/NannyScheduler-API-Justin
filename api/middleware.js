@@ -7,9 +7,9 @@ module.exports = {
 
 
 function bcryptEncoding(req, res, next) {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
   
-    if (username && password) {
+    if (email && password) {
       helper.login(username)
         .then(user => {
           if (user && bcrypt.compareSync(password, user.password)) {
@@ -27,7 +27,7 @@ function bcryptEncoding(req, res, next) {
   }
 
   function CookieAuth(req, res, next) {
-    if (req.session && req.session.userID) {
+    if (req.session && req.session.user) {
         next();
       } else {
         res.status(401).json({ message: 'you shall not pass!!' });
