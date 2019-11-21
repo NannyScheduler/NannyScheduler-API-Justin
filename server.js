@@ -32,7 +32,7 @@ server.use(session(sessionConfig));
 //Defining Routes
 server.use('/api/nannies', nannyRouter);
 server.use('/api/users', userRouter);
-server.use('/api/parents', cookieAuth, parentRouter);
+server.use('/api/parents', parentRouter);
 
 
 

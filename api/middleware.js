@@ -10,7 +10,7 @@ function bcryptEncoding(req, res, next) {
     const { email, password } = req.body;
   
     if (email && password) {
-      helper.login(username)
+      helper.login(email)
         .then(user => {
           if (user && bcrypt.compareSync(password, user.password)) {
             next();
@@ -27,7 +27,7 @@ function bcryptEncoding(req, res, next) {
   }
 
   function CookieAuth(req, res, next) {
-    if (req.session && req.session.user) {
+    if (req.session && req.session.userID) {
         next();
       } else {
         res.status(401).json({ message: 'you shall not pass!!' });

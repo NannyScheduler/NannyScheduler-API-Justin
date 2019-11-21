@@ -9,9 +9,6 @@ router.use(bodyParser.urlencoded({ extended: false }))
 
 const bcrypt = require('bcryptjs');
 
-
-const Middleware = require('./middleware');
-
 //Log in Parents
 router.post('/login', (req, res) => {
     const {password} = req.body;
@@ -20,7 +17,7 @@ router.post('/login', (req, res) => {
     if(!user || !bcrypt.compareSync(password, user.password)) {
         return res.status(401).json({error: `Incorrect login details!`})
     } else {
-        req.session.user = user;
+        req.session.userID = user;
         return res.status(200).json({message: `Welcome, ${user.fname}!`})
     }
     })
@@ -39,9 +36,8 @@ router.get('/:id', (req, res) => {
 })
 
 //Get Nanny by City
-router.get('/:city', (req, res) => {
-    const city = req.params.city;
-    Parent.findNannyByCity(city)
+router.get('/search', (req, res) => {
+    Parent.findNannyByCity(req.query.city)
     .then(nanny => {
         res.status(200).json(nanny)
     })
@@ -90,6 +86,18 @@ router.delete('/:id', (req, res) => {
 
 })
 
+//Log out parent
+router.get('/logout', (req, res) => {
+    if (req.session) {
+      req.session.destroy(err => {
+        if (err) {
+          res.send('error logging out');
+        } else {
+          res.send('good bye');
+        }
+      });
+    }
+  });
 
 
 module.exports = router;

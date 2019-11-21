@@ -76,8 +76,9 @@ function deleteNanny(id) {
 
 //6. Find nanny by city
 //2. Find Nanny by id
-function findNannyByCity(city) {
-    return db('nannies').where({ city: city });
+async function findNannyByCity(city) {
+    const nannyByCity = await db('nannies').where({city: city});
+    return nannyByCity;
 }
 
 //---------------- END OF NANNY STUFF, START OF PARENTS STUFF --------------------------
