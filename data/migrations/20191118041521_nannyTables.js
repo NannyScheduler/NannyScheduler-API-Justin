@@ -24,8 +24,8 @@ exports.up = function(knex) {
         tbl.string('fname', 128).notNullable();
         tbl.string('lname', 128).notNullable();
         tbl.boolean('can_drive').notNullable();
-        tbl.boolean('first_aid').notNullable();
-        tbl.string('address', 128).notNullable();
+        tbl.integer('hourly_rates').notNullable();
+        tbl.string('city', 128).notNullable();
         tbl.string('phone', 128).notNullable();
         tbl.string('img', 128);
         tbl.string('lang', 128);
