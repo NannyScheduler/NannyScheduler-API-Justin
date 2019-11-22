@@ -64,7 +64,7 @@ router.post('/register', (req, res) => {
         res.status(201).json({message: `New nanny named ${req.body.fname} created!`})
     })
     .catch(err => {
-        res.status(501).json({message: `Something went wrong. The error is: ${err.message}`})
+        res.status(501).json({message: `This nanny with email address ${email} already exists. Sorry!`})
     })
 // }
 })

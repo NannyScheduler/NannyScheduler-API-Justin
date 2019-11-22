@@ -4,7 +4,10 @@ const Parent = require('./nanny-models');
 const bodyParser    = require('body-parser');
 
 router.use(bodyParser.json())
-router.use(bodyParser.urlencoded({ extended: false }))
+router.use(bodyParser.urlencoded({ extended: false }));
+
+const cookie = require('./middleware');
+const auth = cookie.CookieAuth;
 
 
 const bcrypt = require('bcryptjs');
@@ -15,55 +18,48 @@ router.get('/', (req, res) => {
 
 //Log in Parents
 router.post('/login', (req, res) => {
-    const {password} = req.body;
-    Parent.loginParent(req.body.email)
+    const {password, email} = req.body;
+    if (email && password ) {
+    Parent.loginParent(email)
     .then(user => {
     if(!user || !bcrypt.compareSync(password, user.password)) {
         return res.status(401).json({error: `Incorrect login details!`})
-    } else {
+    } 
+
+    else {
         req.session.userID = user;
         return res.status(200).json({message: `Welcome, ${user.fname}!`})
     }
     })
+}
+else {
+    return res.status(401).json({message: `email or password fields empty`})
+}
   });
 
-// Get Nanny by id
-// router.get('/', (req, res) => {
-//     const id = req.query.id
-//     Parent.findNannyById(id)
-//     .then(nanny => {
-//         res.status(200).json(nanny)
-//     })
-//     .catch(err => {
-//         res.status(501).json({message: `Couldn't get this parent's info, and here's why: ${err.message}`})
-//     })
-// })
-
-// //Get Nanny by City
-// router.get('/:city', (req, res) => {
-//     const city = req.params.city;
-//     city.toString();
-//     Parent.findNannyByCity(city)
-//     .then(nanny => {
-//         res.status(200).json(nanny)
-//     })
-//     .catch(err => {
-//         res.status(501).json({message: `Couldn't get this nanny's info, and here's why: ${err.message}`})
-//     })
-// })
+// Get Nanny by city
+router.post('/', auth, (req, res) => {
+    const city = req.query.city;
+    Parent.findNannyByCity(city)
+    .then(nanny => {
+        res.status(200).json(nanny)
+    })
+    .catch(err => {
+        res.status(501).json({message: `There are no nannies in ${city}.`})
+    })
+})
 
 //Create new parent
 router.post('/register', (req, res) => {
     const parent = req.body;
     const hash = bcrypt.hashSync(parent.password, 14);
     parent.password = hash;
-    console.log(hash);
     Parent.createParent(parent)
     .then(() => {
         res.status(201).json({message: `New parent named ${parent.fname} created!`})
     })
     .catch(err => {
-        res.status(501).json({message: `Something went wrong. The error is: ${err.message}`})
+        res.status(501).json({message: `Some critical fields missing.`})
     })
 })
 

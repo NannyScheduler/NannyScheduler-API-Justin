@@ -20,8 +20,8 @@ const sessionConfig = {
     saveUninitialized: false,
   }
 
-const authenticate = require('./api/middleware');
-const cookieAuth = authenticate.CookieAuth;
+// const authenticate = require('./api/middleware');
+// const cookieAuth = authenticate.CookieAuth;
 
 const server = express();
 server.use(helmet());
