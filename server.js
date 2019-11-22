@@ -38,12 +38,12 @@ server.use('/api/parents', parentRouter);
 
 //Base/landing endpoints
 server.get('/', (req, res) => {
-    res.status(201).send('<img src="https://media.giphy.com/media/1hBWHsBYoqYOfsmAsL/giphy.gif"/>')
+    res.status(201).json({api: `I am up!`})
 });
 
-server.get('/api', (req, res) => {
-    res.status(201).send('<img src="https://media.giphy.com/media/UqUJhrD0om73q/giphy.gif"/>')
-});
+// server.get('/api', (req, res) => {
+//     res.status(201).send('<img src="https://media.giphy.com/media/UqUJhrD0om73q/giphy.gif"/>')
+// });
 
 
 

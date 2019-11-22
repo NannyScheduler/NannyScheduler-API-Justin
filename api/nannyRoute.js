@@ -7,6 +7,9 @@ const moment = require('moment');
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: false }))
 
+//Validator
+const validate = require('../validate');
+
 
 const bcrypt = require('bcryptjs');
 
@@ -36,23 +39,36 @@ router.get('/:id', (req, res) => {
 
 //Create new nanny
 router.post('/register', (req, res) => {
-    const nanny = req.body;
-    const hash = bcrypt.hashSync(nanny.password, 14);
-    nanny.password = hash;
-    let fromdate = nanny.fromdate;
-    let todate = nanny.todate;
+   let {
+        fname,
+        lname,
+        can_drive,
+        hourly_rates,
+        phone,
+        city,
+        fromdate,
+        todate,
+        email,
+        password
+      } = req.body;
+    //   const validator = validate.validateNanny(req.body);
+    const hash = bcrypt.hashSync(password, 14);
+    password = hash;
     const momentFromDate = moment(fromdate, "HH:mm:ss").format("hh:mm a");
     const momentToDate = moment(todate, "HH:mm:ss").format("hh:mm a");
     fromdate = momentFromDate;
     todate = momentToDate;
-    Nanny.createNanny(nanny)
+    // if (validator) {
+    Nanny.createNanny(req.body)
     .then(() => {
-        res.status(201).json({message: `New nanny named ${nanny.fname} created!`})
+        res.status(201).json({message: `New nanny named ${req.body.fname} created!`})
     })
     .catch(err => {
         res.status(501).json({message: `Something went wrong. The error is: ${err.message}`})
     })
+// }
 })
+
 
 //Edit/Update Nanny
 router.put('/:id', (req, res) => {
